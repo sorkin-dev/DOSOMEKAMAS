@@ -1,0 +1,76 @@
+:root {
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #1a1a2e;
+  --accent: #e2b04a;
+  --accent-dim: #a07830;
+  --text-primary: #e8e8e8;
+  --text-secondary: #9a9aaa;
+  --border: #2a2a3e;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background: radial-gradient(ellipse at center, var(--bg-secondary) 0%, var(--bg-primary) 70%);
+}
+
+.app-header {
+  text-align: center;
+}
+
+.app-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-shadow: 0 0 40px rgba(226, 176, 74, 0.3);
+}
+
+.app-tagline {
+  margin-top: 0.75rem;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.app-info {
+  margin-top: 2rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.app-version {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
