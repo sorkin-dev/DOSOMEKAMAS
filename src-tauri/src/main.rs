@@ -7,6 +7,7 @@ use dosomekamas_lib::errors::AppError;
 use dosomekamas_lib::models::item::ItemState;
 use dosomekamas_lib::models::probability::{ForgeRecommendation, ProbabilityResult, SinkState};
 use dosomekamas_lib::models::rune::Rune;
+use dosomekamas_lib::ocr::parser::ParsedItemStats;
 
 #[tauri::command]
 fn get_app_info() -> Result<serde_json::Value, AppError> {
@@ -47,6 +48,24 @@ fn calculate_ev_cmd(item_state: ItemState, rune: Rune) -> Result<f64, AppError> 
     Ok(calculate_ev(&item_state, &rune))
 }
 
+/// Capture a screen region and return it as a base64-encoded PNG.
+#[tauri::command]
+fn capture_screen_region(x: i32, y: i32, width: u32, height: u32) -> Result<String, AppError> {
+    dosomekamas_lib::ocr::capture::capture_region(x, y, width, height)
+}
+
+/// Accept a base64-encoded PNG image and return the OCR text.
+#[tauri::command]
+fn recognize_text_from_image(image_base64: String) -> Result<String, AppError> {
+    dosomekamas_lib::ocr::recognize::recognize_text_from_image(image_base64)
+}
+
+/// Parse an OCR text string and return the structured item stats.
+#[tauri::command]
+fn parse_stats_from_text(text: String) -> Result<ParsedItemStats, AppError> {
+    dosomekamas_lib::ocr::parser::parse_stats_from_text(text)
+}
+
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
@@ -56,6 +75,9 @@ fn main() {
             calculate_sink_state,
             get_recommendation_cmd,
             calculate_ev_cmd,
+            capture_screen_region,
+            recognize_text_from_image,
+            parse_stats_from_text,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

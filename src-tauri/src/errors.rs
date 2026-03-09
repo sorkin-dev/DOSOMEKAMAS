@@ -3,6 +3,9 @@ pub enum AppError {
     #[error("OCR error: {0}")]
     Ocr(String),
 
+    #[error("Screen capture error: {0}")]
+    ScreenCapture(String),
+
     #[error("DofusDB API error: {code} \u{2014} {message}")]
     DofusDbApi { code: u32, message: String },
 

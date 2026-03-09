@@ -21,3 +21,5 @@ export type {
   DofusDbApiError,
 } from "./dofusdb";
 
+export type { CaptureRegion, ParsedStat, ParsedItemStats } from "./ocr";
+
